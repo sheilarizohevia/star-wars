@@ -1,0 +1,10 @@
+<div class="row row-item" *ngFor="let item of buildList(); let index = index">
+  <div *ngFor="let x of item" class="col">
+    {{x.value}}
+  </div>
+  <div class="col">
+    <button [routerLink]="this.getIdByUrl(this.list[index].url)" type="button" class="btn btn-outline-primary btn-sm">
+      Details
+    </button>
+  </div>
+</div>
