@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DetailsService } from 'src/app/services/details.service';
@@ -10,7 +11,8 @@ import { DetailsService } from 'src/app/services/details.service';
 export class DetailsComponent implements OnInit {
   details: any;
   constructor(private activatedRoute: ActivatedRoute,
-    private detailsService: DetailsService) { }
+    private detailsService: DetailsService,
+    private location: Location) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((param: any) => {
@@ -39,4 +41,7 @@ export class DetailsComponent implements OnInit {
     return properties;
   }
 
+  back() {
+    this.location.back();
+  }
 }

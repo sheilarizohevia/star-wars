@@ -1,6 +1,6 @@
 <div class="input-group mb-3">
   <input type="text" #text class="form-control" [value]="search" [disabled]="!searchVisible" placeholder="Buscar" aria-label="Recipient's username" aria-describedby="button-addon2">
-  <button (click)="navigate(text.value)" class="btn btn-outline-secondary" type="button" id="button-addon2">
+  <button (click)="searchText(text.value)" class="btn btn-outline-secondary" type="button" id="button-addon2">
     <i class="fa fa-search"></i>
   </button>
 </div>

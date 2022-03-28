@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CoreService } from 'src/app/services/core.service';
 
 @Component({
   selector: 'app-search',
@@ -7,19 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  @Input('search') search: string = '';
+  search: string = '';
   @Input('searchVisible') searchVisible = false;
 
-  constructor(private router: Router) { }
+  constructor(private coreService: CoreService) { }
 
   ngOnInit(): void {
   }
 
-  navigate(search: string) {
-    this.router.navigate([], {
-      queryParams: {search},
-      queryParamsHandling: 'merge',
-  });
+  searchText(text: string) {
+    this.coreService.setSearch(text);
   }
-
 }

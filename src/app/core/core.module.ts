@@ -15,6 +15,7 @@ import {PeopleAdapter} from '../utils/adapters/people.adapter';
 import { StartshipsAdapter } from '../utils/adapters/startships.adapter';
 import { StarshipsService } from '../services/starships.service';
 import { DetailsService } from '../services/details.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [

@@ -1,7 +1,7 @@
 
 <div class="btn-group" role="group" aria-label="Basic outlined example">
   <button *ngFor="let item of routes; let index = index"
-   type="button" class="btn btn-outline-primary" [routerLink]="item">
-    <span class="fa fa-search"></span> Search {{index + 1}}
+   type="button" class="btn btn-outline-primary" (click)="search(item)">
+    <span class="fa fa-search"></span> {{item.search}}
   </button>
   </div>

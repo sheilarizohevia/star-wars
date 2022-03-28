@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { RouteModel } from 'src/app/models/route.model';
 
 @Component({
   selector: 'app-header',
@@ -6,8 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-@Input('search') search = '';
-@Input('routes') routes: Array<string> = [];
+@Input('routes') routes: Array<RouteModel> = [];
 @Input('searchVisible') searchVisible = false;
   constructor() { }
 

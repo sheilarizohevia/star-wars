@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Action, Store } from '@ngrx/store';
 import { PeopleModel } from 'src/app/models/people.model';
+import { RouteModel } from 'src/app/models/route.model';
 import { StartshipsModel } from 'src/app/models/startships.model';
 import { CoreService } from 'src/app/services/core.service';
 import { DetailsService } from 'src/app/services/details.service';
@@ -10,7 +11,7 @@ import { PeopleService } from 'src/app/services/people.service';
 import { StarshipsService } from 'src/app/services/starships.service';
 
 interface AppState {
-   routes: string
+  routes: string
 }
 @Component({
   selector: 'app-section-star-wars',
@@ -21,7 +22,7 @@ export class SectionStarWarsComponent implements OnInit {
   resource: string = '';
   search: string = '';
   detailMode: boolean = false;
-  routes: Array<string> = [];
+  routes: Array<RouteModel> = [];
 
   constructor(
     private store: Store<AppState>,
@@ -32,38 +33,46 @@ export class SectionStarWarsComponent implements OnInit {
     private coreService: CoreService,
     private detailsService: DetailsService) {
 
-    route.queryParams.subscribe(p => {
-
-      if (p['search']) {
-        this.search = p['search'];
-      } else {
-        this.search = '';
-      }
-      if (this.resource) {
-        const action: Action = {
-          type: `/${this.resource}?search=${this.search}`
-        };
-        this.store.dispatch(action);
-        this.getResources();
-      }
+    route.queryParams.subscribe((p: any) => {
+      this.routes = this.coreService.getRoutes();
+     
     });
   }
 
   ngOnInit(): void {
-    this.store.subscribe(state => {
-      this.routes.push(state.routes);
-      if(this.routes.length == 5) {
-        this.routes.splice(0, 1);
-      }
+    this.coreService.lastSearch.subscribe((lastSearch: RouteModel) => {
+      this.resource = lastSearch.resource;
+      this.router.navigate([this.resource]);
+      this.search = lastSearch.search;
+      this.getResources();
     })
 
-    this.coreService.resource.subscribe((resource: string) => {
-      this.resource = resource;
-      this.detailMode = false;
+    this.coreService.search.subscribe((text: string) => {
+      this.search = text;
       const action: Action = {
-        type: `/${this.resource}`
+        type: this.search
       };
       this.store.dispatch(action);
+      this.getResources();
+    });
+
+    this.store.subscribe((state: any) => {
+      if (state.routes && state.routes != '') {
+        this.routes.push({
+          search: state.routes,
+          resource: this.resource
+        });
+        if (this.routes.length == 5) {
+          this.routes.splice(0, 1);
+        }
+        this.coreService.saveRoutes(this.routes);
+      }
+    });
+
+    this.coreService.resource.subscribe((resource: string) => {
+      this.search = '';
+      this.resource = resource;
+      this.detailMode = false;
       this.getResources();
     })
 
@@ -83,7 +92,7 @@ export class SectionStarWarsComponent implements OnInit {
         this.getStarships();
       } break
       default: {
-        alert('Pagina en mantenimiento')
+        this.router.navigate(['maintenance'], );
       }
     }
   }

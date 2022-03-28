@@ -4,6 +4,7 @@ import { ListComponent } from './list/list.component';
 import { DetailsComponent } from './details/details.component';
 import {SharedComponent} from "./shared.component";
 import { RouterModule } from '@angular/router';
+import { MaintenanceComponent } from './maintenance/maintenance/maintenance.component';
 
 
 
@@ -11,7 +12,8 @@ import { RouterModule } from '@angular/router';
   declarations: [
     ListComponent,
     DetailsComponent,
-    SharedComponent
+    SharedComponent,
+    MaintenanceComponent
   ],
   imports: [
     CommonModule,
