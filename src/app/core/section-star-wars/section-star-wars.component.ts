@@ -23,7 +23,7 @@ export class SectionStarWarsComponent implements OnInit {
   search: string = '';
   detailMode: boolean = false;
   routes: Array<RouteModel> = [];
-
+  
   constructor(
     private store: Store<AppState>,
     private route: ActivatedRoute,
@@ -32,14 +32,11 @@ export class SectionStarWarsComponent implements OnInit {
     private startShipsService: StarshipsService,
     private coreService: CoreService,
     private detailsService: DetailsService) {
-
-    route.queryParams.subscribe((p: any) => {
-      this.routes = this.coreService.getRoutes();
-     
-    });
   }
 
   ngOnInit(): void {
+    this.routes = this.coreService.getRoutes();
+
     this.coreService.lastSearch.subscribe((lastSearch: RouteModel) => {
       this.resource = lastSearch.resource;
       this.router.navigate([this.resource]);
@@ -70,7 +67,6 @@ export class SectionStarWarsComponent implements OnInit {
     });
 
     this.coreService.resource.subscribe((resource: string) => {
-      this.search = '';
       this.resource = resource;
       this.detailMode = false;
       this.getResources();

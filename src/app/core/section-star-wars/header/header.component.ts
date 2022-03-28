@@ -7,6 +7,7 @@ import { RouteModel } from 'src/app/models/route.model';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+@Input('search') search: string = '';
 @Input('routes') routes: Array<RouteModel> = [];
 @Input('searchVisible') searchVisible = false;
   constructor() { }

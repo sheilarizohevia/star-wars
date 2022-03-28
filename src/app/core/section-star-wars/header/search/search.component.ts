@@ -8,7 +8,7 @@ import { CoreService } from 'src/app/services/core.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  search: string = '';
+  @Input('search') search: string = '';
   @Input('searchVisible') searchVisible = false;
 
   constructor(private coreService: CoreService) { }
@@ -18,5 +18,9 @@ export class SearchComponent implements OnInit {
 
   searchText(text: string) {
     this.coreService.setSearch(text);
+  }
+
+  resetSearch() {
+    this.coreService.setSearch('');
   }
 }
