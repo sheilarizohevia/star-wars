@@ -39,8 +39,8 @@ export class SectionStarWarsComponent implements OnInit {
 
     this.coreService.lastSearch.subscribe((lastSearch: RouteModel) => {
       this.resource = lastSearch.resource;
-      this.router.navigate([this.resource]);
       this.search = lastSearch.search;
+      this.router.navigate([this.resource]);
       this.getResources();
     })
 
@@ -52,6 +52,8 @@ export class SectionStarWarsComponent implements OnInit {
       this.store.dispatch(action);
       this.getResources();
     });
+
+    this.coreService.resetSearch.subscribe(() => this.search = '')
 
     this.store.subscribe((state: any) => {
       if (state.routes && state.routes != '') {

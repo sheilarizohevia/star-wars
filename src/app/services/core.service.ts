@@ -9,6 +9,7 @@ export class CoreService {
   list = new Subject<Array<any>>();
   resource = new Subject<string>();
   search = new Subject<string>();
+  resetSearch = new Subject<boolean>();
     lastSearch = new Subject<RouteModel>();
 
   constructor() { }
@@ -24,6 +25,10 @@ export class CoreService {
 
   setSearch(text: string) {
     this.search.next(text)
+  }
+  
+  setResetSearch() {
+    this.resetSearch.next(true);
   }
 
   setLastSearch(routeModel: RouteModel) {

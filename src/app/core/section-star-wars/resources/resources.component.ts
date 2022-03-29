@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router} from "@angular/router";
+import { Router } from "@angular/router";
+import { CoreService } from 'src/app/services/core.service';
 
 @Component({
   selector: 'app-resources',
@@ -8,10 +9,17 @@ import { Router} from "@angular/router";
 })
 export class ResourcesComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private coreService: CoreService) { }
 
   ngOnInit(): void {
 
   }
-
+  setResource(route: string) {
+    this.coreService.setResetSearch();
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([route]);
+    })
+  
+  }
 }
