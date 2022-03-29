@@ -8,7 +8,7 @@ import { CoreService } from 'src/app/services/core.service';
   styleUrls: ['./resources.component.css']
 })
 export class ResourcesComponent implements OnInit {
-
+  @Input('resource') resource = '';
   constructor(private router: Router,
     private coreService: CoreService) { }
 

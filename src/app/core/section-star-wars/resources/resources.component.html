@@ -1,22 +1,22 @@
 <div class="card card-container">
   <ul class="nav nav-pills nav-fill">
     <li class="nav-item"> 
-      <a class="nav-link" routerLinkActive="active" (click)="setResource('people')">People</a>
+      <a class="nav-link" [ngClass]="{'active': resource == 'people'}" (click)="setResource('people')">People</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active"  (click)="setResource('starships')">Starships</a>
+      <a class="nav-link" [ngClass]="{'active': resource == 'starships'}" (click)="setResource('starships')">Starships</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active"  (click)="setResource('film')">Films</a>
+      <a class="nav-link" [ngClass]="{'active': resource == 'film'}" (click)="setResource('film')">Films</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active"  (click)="setResource('planets')">Planets</a>
+      <a class="nav-link" [ngClass]="{'active': resource == 'planets'}" (click)="setResource('planets')">Planets</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active"  (click)="setResource('species')">Species</a>
+      <a class="nav-link" [ngClass]="{'active': resource == 'species'}" (click)="setResource('species')">Species</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active"  (click)="setResource('vehicles')">Vehicles</a>
+      <a class="nav-link" [ngClass]="{'active': resource == 'vehicles'}" (click)="setResource('vehicles')">Vehicles</a>
     </li>
   </ul>
 </div>
